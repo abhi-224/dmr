@@ -1,12 +1,16 @@
 server:
   port: 42069
+
 spring:
   application:
     name: dmr
+
   ai:
     ollama:
-      chat:
-        options:
-          model: qwen3.5:cloud
       base:
         url: http://localhost:11434
+
+ai:
+  models:
+    qwen: qwen3.5:cloud
+    gemma: gemma3:1b
