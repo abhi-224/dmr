@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PoemAnalyzer {
 
-  private final ChatClient qwenChatClient;
+  private final ChatClient gemmaChatClient;
 
   public LiteraryInfo analyze(final String poemTitle) {
 
@@ -32,7 +32,7 @@ public class PoemAnalyzer {
     {poem_title}
     """;
 
-    return qwenChatClient
+    return gemmaChatClient
         .prompt()
         .user(u -> u.text(templ).param("poem_title", poemTitle))
         .call()

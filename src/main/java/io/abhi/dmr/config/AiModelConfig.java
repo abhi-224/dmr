@@ -20,7 +20,12 @@ public class AiModelConfig {
   public OllamaChatModel qwenModel(OllamaApi ollamaApi) {
     return OllamaChatModel.builder()
         .ollamaApi(ollamaApi)
-        .defaultOptions(OllamaChatOptions.builder().model(qwenModelName).build())
+        .defaultOptions(
+            OllamaChatOptions.builder()
+                .model(qwenModelName)
+                .temperature(0.2)
+                .numPredict(300)
+                .build())
         .build();
   }
 
@@ -28,7 +33,12 @@ public class AiModelConfig {
   public OllamaChatModel gemmaModel(OllamaApi ollamaApi) {
     return OllamaChatModel.builder()
         .ollamaApi(ollamaApi)
-        .defaultOptions(OllamaChatOptions.builder().model(gemmaModelName).build())
+        .defaultOptions(
+            OllamaChatOptions.builder()
+                .model(gemmaModelName)
+                .temperature(0.2)
+                .numPredict(300)
+                .build())
         .build();
   }
 }

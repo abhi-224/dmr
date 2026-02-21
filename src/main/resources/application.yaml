@@ -12,5 +12,5 @@ spring:
 
 ai:
   models:
-    qwen: qwen3.5:cloud
+    qwen: qwen2.5:3b
     gemma: gemma3:1b
