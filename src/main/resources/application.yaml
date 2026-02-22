@@ -12,5 +12,18 @@ spring:
 
 ai:
   models:
-    qwen: qwen2.5:3b
+    qwen: qwen3.5:cloud
     gemma: gemma3:1b
+
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            client:
+              advisor: DEBUG
+    io:
+      abhi:
+        dmr:
+          advisors: DEBUG
