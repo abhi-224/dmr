@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ChatController {
 
-  //  @Qualifier("gemmaChatClient")
   private final ChatClient gemmaChatClient;
   private final ChatClient qwenChatClient;
-
-  //  @Qualifier("qwenChatClient")
 
   @PostMapping
   ResponseEntity<Map<String, String>> chat(

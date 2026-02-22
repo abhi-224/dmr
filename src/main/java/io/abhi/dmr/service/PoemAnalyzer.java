@@ -1,8 +1,11 @@
 package io.abhi.dmr.service;
 
 import io.abhi.dmr.types.LiteraryInfo;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.prompt.PromptTemplate;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,28 +16,15 @@ public class PoemAnalyzer {
 
   public LiteraryInfo analyze(final String poemTitle) {
 
-    final String templ =
-        """
-    You are a literary analysis expert.
+    PromptTemplate systemTemplate =
+        new PromptTemplate(new ClassPathResource("prompts/system.st"));
 
-    Return ONLY valid JSON matching this structure:
-
-    poemTitle: string
-    poemAuthor: string
-    publishYear: integer or null
-    poemSummary: string
-    language: string
-    themes: list of strings
-
-    If a value is unknown, return null.
-
-    Now analyze this poem:
-    {poem_title}
-    """;
+    PromptTemplate userTemplate = new PromptTemplate(new ClassPathResource("prompts/user.st"));
 
     return gemmaChatClient
         .prompt()
-        .user(u -> u.text(templ).param("poem_title", poemTitle))
+        .system(systemTemplate.create().getContents())
+        .user(userTemplate.create(Map.of("poem_title", poemTitle)).getContents())
         .call()
         .entity(LiteraryInfo.class);
   }
