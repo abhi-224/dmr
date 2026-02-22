@@ -13,15 +13,15 @@ import org.springframework.stereotype.Service;
 public class PoemAnalyzer {
 
   private final ChatClient gemmaChatClient;
+  private final ChatClient qwenChatClient;
 
   public LiteraryInfo analyze(final String poemTitle) {
 
-    PromptTemplate systemTemplate =
-        new PromptTemplate(new ClassPathResource("prompts/system.st"));
+    PromptTemplate systemTemplate = new PromptTemplate(new ClassPathResource("prompts/system.st"));
 
     PromptTemplate userTemplate = new PromptTemplate(new ClassPathResource("prompts/user.st"));
 
-    return gemmaChatClient
+    return qwenChatClient
         .prompt()
         .system(systemTemplate.create().getContents())
         .user(userTemplate.create(Map.of("poem_title", poemTitle)).getContents())
