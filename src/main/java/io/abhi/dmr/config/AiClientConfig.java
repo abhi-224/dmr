@@ -23,7 +23,7 @@ public class AiClientConfig {
 
     return ChatClient.builder(qwenModel)
         .defaultAdvisors(chatMemoryAdvisor, new TokenUsageAdvisor(), new SimpleLoggerAdvisor())
-        .defaultOptions(ChatOptions.builder().maxTokens(2000).temperature(0.2).build())
+//        .defaultOptions(ChatOptions.builder().maxTokens(2000).temperature(0.2).build())
         .build();
   }
 
