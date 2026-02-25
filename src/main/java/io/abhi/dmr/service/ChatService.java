@@ -2,6 +2,7 @@ package io.abhi.dmr.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,9 +10,10 @@ import org.springframework.stereotype.Service;
 public class ChatService {
   private final ChatClient qwenChatClient;
 
-  public String chat(final String query) {
+  public String chat(final String query, final String convoId) {
     return qwenChatClient
         .prompt()
+        .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, convoId))
         .system(
             s ->
                 s.text(

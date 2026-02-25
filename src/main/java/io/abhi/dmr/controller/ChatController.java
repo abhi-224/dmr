@@ -40,7 +40,8 @@ public class ChatController {
   }
 
   @PostMapping
-  ResponseEntity<String> chat(@RequestParam("q") final String query) {
-    return ResponseEntity.ok(chatService.chat(query));
+  ResponseEntity<String> chat(
+      @RequestParam("q") final String query, @RequestParam("convo") final String convoId) {
+    return ResponseEntity.ok(chatService.chat(query, convoId));
   }
 }
