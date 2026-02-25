@@ -1,5 +1,6 @@
 package io.abhi.dmr.controller;
 
+import io.abhi.dmr.service.ChatService;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,8 @@ public class ChatController {
   private final ChatClient gemmaChatClient;
   private final ChatClient qwenChatClient;
 
+  private final ChatService chatService;
+
   @PostMapping("/qwen")
   ResponseEntity<Map<String, String>> chatWithQwen(@RequestParam("q") final String question) {
     final var response = qwenChatClient.prompt().user(question.trim()).call().content();
@@ -34,5 +37,10 @@ public class ChatController {
     responseMap.put("You", question);
     responseMap.put("Qwen", response);
     return ResponseEntity.ok(responseMap);
+  }
+
+  @PostMapping
+  ResponseEntity<String> chat(@RequestParam("q") final String query) {
+    return ResponseEntity.ok(chatService.chat(query));
   }
 }
